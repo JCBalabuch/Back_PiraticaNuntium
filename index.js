@@ -3,6 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const { PORT } = require('./src/utils/urls');
 const { connectDDBB } = require('./src/config/ddbb');
+const newsRouter = require('./src/api/routes/news.routes');
 
 // Express application instance
 const app = express();
@@ -11,7 +12,7 @@ const app = express();
 connectDDBB();
 
 //Routes
-// app.use('piratica_nuntium', searchRouter);
+app.use('piratica_nuntium', newsRouter);
 
 // Handle routes not found
 app.use('*', (req, res, next) => {

@@ -89,7 +89,7 @@ const extractData = async (page, browser) => {
 };
 
 const fileNewsDataColected = (scrapedNews) => {
-  fs.writeFile('newsData.json', JSON.stringify(scrapedNews), () => {
+  fs.writeFile('./data/newsData.json', JSON.stringify(scrapedNews), () => {
     console.log('Wroten file news');
   });
 };
