@@ -22,6 +22,7 @@ const extractData = async (page, browser) => {
     const data = tableData[i];
 
     const title = await row.$eval('.titleline', (e) => e.textContent);
+    const link = await row.$eval('.titleline > a', (e) => e.href);
 
     let site;
     try {
@@ -55,36 +56,42 @@ const extractData = async (page, browser) => {
         (e) => e.textContent
       );
 
-      console.log('línea 59', typeof commentText);
-      console.log('línea 59', commentText);
-      console.log('línea 60', commentText.length);
-      console.log('línea 61', commentText.includes('&nbsp;comments'));
-      console.log('línea 62', commentText.includes(' comments'));
-
-      //   comments = commentText.includes('&nbsp;comments')
-      //     ? parseInt(commentText.replace('&nbsp;comments', ''))
-      //     : commentText;
-
-      //   console.log('línea 63', comments);
-
-      //   parseInt(e.textContent.replace(' points', ''));
+      comments =
+        parseInt(commentText.replace(`/\s*comments/`, '')) || commentText;
     } catch (error) {
       comments = 0;
     }
 
     const news = {
       title,
+      link,
       site,
       score,
       user,
       time,
       comments,
     };
-
     scrapedNews.push(news);
   }
 
-  //   console.log(scrapedNews);
+  try {
+    await page.$eval('.morelink', (e) => e.click());
+    await page.waitForNavigation();
+
+    console.log(`Llevamos ${scrapedNews.length} noticias recolectadas`);
+
+    extractData(page, browser);
+  } catch (error) {
+    fileNewsDataColected(scrapedNews);
+    console.log(scrapedNews);
+    await browser.close();
+  }
+};
+
+const fileNewsDataColected = (scrapedNews) => {
+  fs.writeFile('newsData.json', JSON.stringify(scrapedNews), () => {
+    console.log('Wroten file news');
+  });
 };
 
 // Exports
