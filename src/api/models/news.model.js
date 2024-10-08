@@ -10,12 +10,12 @@ const newsSchema = new mongoose.Schema(
     score: { type: Number, required: true },
     user: { type: String, required: true },
     time: { type: Date, required: true },
-    comment: {
-      type: Number,
+    comments: {
+      type: mongoose.Schema.Types.Mixed,
       required: true,
       validate: {
         validator: function (v) {
-          return typeof v === 'Number' || typeof v === 'String';
+          return typeof v === 'number' || typeof v === 'string';
         },
       },
     },

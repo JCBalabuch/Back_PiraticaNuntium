@@ -1,6 +1,9 @@
 // Imports
+require('dotenv').config();
 const puppeteer = require('puppeteer');
 const fs = require('fs');
+const News = require('../../api/models/news.model');
+const { default: mongoose } = require('mongoose');
 
 const scrapedNews = [];
 
@@ -83,7 +86,8 @@ const extractData = async (page, browser) => {
     extractData(page, browser);
   } catch (error) {
     fileNewsDataColected(scrapedNews);
-    console.log(scrapedNews);
+    await saveNewsOnDataBase(scrapedNews);
+    // console.log(scrapedNews);
     await browser.close();
   }
 };
@@ -92,6 +96,28 @@ const fileNewsDataColected = (scrapedNews) => {
   fs.writeFile('./data/newsData.json', JSON.stringify(scrapedNews), () => {
     console.log('Wroten file news');
   });
+};
+
+const saveNewsOnDataBase = async (scrapedNews) => {
+  try {
+    await mongoose.connect(process.env.DDBB_URL);
+    console.log('Scrap connected to DDBB');
+
+    const allNews = await News.find();
+
+    if (allNews.length) {
+      console.log('Deleting News Data');
+      await News.collection.drop();
+      console.log('News Data deleted');
+    }
+
+    console.log('Inserting News Data');
+    await News.insertMany(scrapedNews);
+  } catch (error) {
+    console.error('Error saving news in the Data Base', error);
+  } finally {
+    process.exit();
+  }
 };
 
 // Exports
