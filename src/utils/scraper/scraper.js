@@ -2,9 +2,11 @@
 require('dotenv').config();
 const puppeteer = require('puppeteer');
 const fs = require('fs');
+const mongoose = require('mongoose');
+const { connectDDBB } = require('../../config/ddbb');
 const News = require('../../api/models/news.model');
-const { default: mongoose } = require('mongoose');
 
+// Create scrapedNews empty array
 const scrapedNews = [];
 
 // Connect scraper function
@@ -87,20 +89,21 @@ const extractData = async (page, browser) => {
   } catch (error) {
     fileNewsDataColected(scrapedNews);
     await saveNewsOnDataBase(scrapedNews);
-    // console.log(scrapedNews);
     await browser.close();
   }
 };
 
+// Function to write JSON's file
 const fileNewsDataColected = (scrapedNews) => {
   fs.writeFile('./data/newsData.json', JSON.stringify(scrapedNews), () => {
     console.log('Wroten file news');
   });
 };
 
+// Function to save data on database
 const saveNewsOnDataBase = async (scrapedNews) => {
   try {
-    await mongoose.connect(process.env.DDBB_URL);
+    await connectDDBB();
     console.log('Scrap connected to DDBB');
 
     const allNews = await News.find();

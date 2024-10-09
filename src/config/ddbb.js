@@ -2,11 +2,9 @@
 const mongoose = require('mongoose');
 
 // Function to connect to DDBB
-const connectDDBB = async (req, res, next) => {
+const connectDDBB = async () => {
   try {
     await mongoose.connect(process.env.DDBB_URL, {
-      // useNewUrlParser: true,
-      // useUnifiedTopology: true,
       serverSelectionTimeoutMS: 20000,
     });
     console.log('Successfully connected to the Database');
