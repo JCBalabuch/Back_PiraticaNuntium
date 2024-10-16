@@ -7,8 +7,10 @@ const newsSchema = new mongoose.Schema(
     title: { type: String, required: true },
     link: { type: String, required: true },
     site: { type: String, required: true },
+    sitelink: { type: String, required: true },
     score: { type: Number, required: true },
     user: { type: String, required: true },
+    userlink: { type: String, required: true },
     time: { type: Date, required: true },
     comments: {
       type: mongoose.Schema.Types.Mixed,

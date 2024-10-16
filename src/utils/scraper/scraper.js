@@ -36,6 +36,13 @@ const extractData = async (page, browser) => {
       site = 'No site';
     }
 
+    let sitelink;
+    try {
+      sitelink = await row.$eval('.sitebit > a', (e) => e.href);
+    } catch (error) {
+      sitelink = 'No site';
+    }
+
     let score;
     try {
       score = await data.$eval('.score', (e) =>
@@ -50,6 +57,13 @@ const extractData = async (page, browser) => {
       user = await data.$eval('.hnuser', (e) => e.textContent);
     } catch (error) {
       user = 'No user declared';
+    }
+
+    let userlink;
+    try {
+      userlink = await data.$eval('.hnuser', (e) => e.href);
+    } catch (error) {
+      userlink = 'No user declared';
     }
 
     const time = await data.$eval('.age', (e) => e.title);
@@ -71,8 +85,10 @@ const extractData = async (page, browser) => {
       title,
       link,
       site,
+      sitelink,
       score,
       user,
+      userlink,
       time,
       comments,
     };
