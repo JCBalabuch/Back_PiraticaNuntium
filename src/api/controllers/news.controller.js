@@ -1,21 +1,20 @@
 // Imports
+const { scraper } = require('../../utils/scraper/scraper');
 const News = require('../models/news.model');
-// const newsData = require('../../../data/newsData.json');
 
-// Save News on Data Base
-const saveNewsOnDB = async (newsData, req, res, next) => {
+const url = process.env.SCRAP_URL;
+
+// Scrap news an save them on database
+
+// Get News
+const getAllNews = async (req, res, next) => {
   try {
-    await News.insertMany(newsData);
-    return res
-      .status(201)
-      .json({ message: 'All News saved on Data Base', element: newsData });
+    const news = await News.find();
+    return res.status(200).json(news);
   } catch (error) {
-    return res.status(400).json({
-      message: `Error inserting the news on Data Base, because: ${error}`,
-    });
+    return res.status(400).json({ message: 'Error getting news', error });
   }
 };
-// Get News
 
 // Exports
-module.exports = { saveNewsOnDB };
+module.exports = { getAllNews };

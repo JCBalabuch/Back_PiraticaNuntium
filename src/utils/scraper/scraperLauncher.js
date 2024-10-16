@@ -1,5 +1,5 @@
 // Imports
 const { scraper } = require('./scraper');
 
-scraper('https://news.ycombinator.com/news');
+scraper(process.env.SCRAP_URL);
 console.log('Scraper started');
