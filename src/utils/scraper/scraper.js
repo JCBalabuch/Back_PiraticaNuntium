@@ -140,4 +140,4 @@ const saveNewsOnDataBase = async (scrapedNews) => {
 };
 
 // Exports
-module.exports = { scraper };
+module.exports = { scrapedNews, scraper };
