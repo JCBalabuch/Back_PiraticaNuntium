@@ -105,6 +105,8 @@ const extractData = async (page, browser) => {
   } catch (error) {
     fileNewsDataColected(scrapedNews);
     await saveNewsOnDataBase(scrapedNews);
+    console.log('Scraper 108', scrapedNews);
+
     await browser.close();
   }
 };

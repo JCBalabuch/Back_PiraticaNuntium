@@ -12,7 +12,7 @@ const newsRouter = require('express').Router();
 newsRouter.get('/get-all-news', getAllNews);
 newsRouter.get('/get-news-by-field', getNewsByField);
 newsRouter.get('/get-sorted-news', getSortedNews);
-newsRouter.get('/scrap-news', getScrapedNews);
+newsRouter.post('/scrap-news', getScrapedNews);
 
 // Exports
 module.exports = newsRouter;

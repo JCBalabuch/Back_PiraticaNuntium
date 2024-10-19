@@ -1,6 +1,7 @@
 // Imports
 const { scraper, scrapedNews } = require('../../utils/scraper/scraper');
 const News = require('../models/news.model');
+const { exec } = require('child_process');
 
 const url = process.env.SCRAP_URL;
 
@@ -97,15 +98,10 @@ const getSortedNews = async (req, res, next) => {
 // Scrap News
 const getScrapedNews = async (req, res, next) => {
   try {
-    scrapedNews.length = 0;
-
     await scraper(url);
-
-    return res
-      .status(200)
-      .json({ message: 'Scrapping completed', data: scrapedNews });
+    return res.status(200).json({ message: 'Scraping started'});
   } catch (error) {
-    console.error('Error during scraing');
+    console.error('Error during scraping', error);
     return res.status(500).json({ message: 'Error during scraping' });
   }
 };
