@@ -101,10 +101,10 @@ const extractData = async (page, browser) => {
 
     console.log(`Llevamos ${scrapedNews.length} noticias recolectadas`);
 
-    extractData(page, browser);
+    await extractData(page, browser);
   } catch (error) {
-    fileNewsDataColected(scrapedNews);
     await saveNewsOnDataBase(scrapedNews);
+    await fileNewsDataColected(scrapedNews);
     console.log('Scraper 108', scrapedNews);
 
     await browser.close();
@@ -114,7 +114,7 @@ const extractData = async (page, browser) => {
 // Function to write JSON's file
 const fileNewsDataColected = (scrapedNews) => {
   fs.writeFile('./data/newsData.json', JSON.stringify(scrapedNews), () => {
-    console.log('Wroten file news');
+    console.log('Written file news');
   });
 };
 

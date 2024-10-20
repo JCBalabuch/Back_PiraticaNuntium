@@ -99,7 +99,7 @@ const getSortedNews = async (req, res, next) => {
 const getScrapedNews = async (req, res, next) => {
   try {
     await scraper(url);
-    return res.status(200).json({ message: 'Scraping started'});
+    return res.status(200).json({ message: 'Scraping started' });
   } catch (error) {
     console.error('Error during scraping', error);
     return res.status(500).json({ message: 'Error during scraping' });
