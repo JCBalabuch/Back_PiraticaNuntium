@@ -2,21 +2,20 @@
 
 ## Overview
 
-Back Piratica Nuntium is a backend application designed to manage and serve content for the Piratica Nuntium project. This project aims to provide a robust and scalable backend solution for handling data and serving it to clients.
+Piratica Nuntium is a backend application designed to manage and deliver content for the Piratica Nuntium project.
+This project aims to provide a backend solution for scraping the https://news.ycombinator.com/news page and then saving the data obtained in a MongoDB database, so that it can then be consulted from the frontend.
 
 ## Features
 
 - RESTful API for data management
-- User authentication and authorization
 - Data storage and retrieval
-- Integration with third-party services (if applicable)
 - Configuration management using `vercel.json`
 
 ## Technologies Used
 
 - Node.js
-- Express.js (or any other framework you are using)
-- MongoDB (or any other database)
+- Express.js
+- MongoDB
 - Git for version control
 - Vercel for deployment
 
@@ -26,13 +25,13 @@ To set up the project locally, follow these steps:
 
 1. Clone the repository:
 
-   ```bash
-   git clone https://github.com/JCBalabuch/Back_PiraticaNuntium.git
-   ```
+```bash
+git clone https://github.com/JCBalabuch/Back_PiraticaNuntium.git
+```
 
 2. Navigate to the project directory:
 
-```
+```bash
 cd Back_PiraticaNuntium
 ```
 
@@ -63,7 +62,10 @@ npm run scrap
 
 ## Usage
 
-Once the application is running, you can access the API at http://localhost:3000 (or the port you configured). Use tools like Postman or Insomnia to interact with the API.
+Once the application is running, you can access the API at http://localhost:3000 (or the port you configured).
+Use tools like Postman or Insomnia to interact with the API.
+
+## Deploy
 
 ## API Endpoints
 
