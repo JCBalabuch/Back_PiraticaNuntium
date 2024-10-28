@@ -67,6 +67,8 @@ Use tools like Postman or Insomnia to interact with the API.
 
 ## Deploy
 
+https://back-piratica-nuntium.vercel.app/
+
 ## API Endpoints
 
 - GET = '/get-all-news'

@@ -66,7 +66,12 @@ const extractData = async (page, browser) => {
       userlink = 'No user declared';
     }
 
-    const time = await data.$eval('.age', (e) => e.title);
+    // const time = await data.$eval('.age', (e) => e.title);
+    const time = await data.$eval('.age', (e) => {
+      const fullDate = e.title;
+      const dateObject = new Date(fullDate);
+      return dateObject.toLocaleDateString();
+    });
 
     let comments;
     try {
