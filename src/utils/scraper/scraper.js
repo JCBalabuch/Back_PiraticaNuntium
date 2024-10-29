@@ -68,8 +68,6 @@ const extractData = async (page, browser) => {
 
     const time = await data.$eval('.age', (e) => e.title.split(' ')[0]);
 
-    console.log(time);
-
     let comments;
     try {
       const commentText = await data.$eval(

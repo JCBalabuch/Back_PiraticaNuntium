@@ -23,6 +23,12 @@ app.use('*', (req, res, next) => {
   return res.status(404).json('Route not found');
 });
 
+// Handle errors
+app.use((err, req, res, next) => {
+  console.error('Error', err);
+  res.status(500).json({ message: 'An error ocurred' });
+});
+
 // Start the server
 app.listen(PORT, () => {
   console.log(`Connected on http://localhost:${PORT}`);
