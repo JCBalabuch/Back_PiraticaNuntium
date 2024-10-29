@@ -105,9 +105,10 @@ const extractData = async (page, browser) => {
   } catch (error) {
     await saveNewsOnDataBase(scrapedNews);
     await fileNewsDataColected(scrapedNews);
-    console.log('Scraper 108', scrapedNews);
 
     await browser.close();
+  } finally {
+    process.exit();
   }
 };
 
@@ -136,8 +137,6 @@ const saveNewsOnDataBase = async (scrapedNews) => {
     await News.insertMany(scrapedNews);
   } catch (error) {
     console.error('Error saving news in the Data Base', error);
-  } finally {
-    process.exit();
   }
 };
 
