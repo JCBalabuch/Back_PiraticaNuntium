@@ -14,7 +14,7 @@ const scraper = async (url) => {
   const browser = await puppeteer.launch({ headless: false });
   const page = await browser.newPage();
   await page.goto(url);
-  extractData(page, browser);
+  await extractData(page, browser);
 };
 
 // Scraper data function
@@ -107,8 +107,6 @@ const extractData = async (page, browser) => {
     await fileNewsDataColected(scrapedNews);
 
     await browser.close();
-  } finally {
-    process.exit();
   }
 };
 
